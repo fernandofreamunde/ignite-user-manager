@@ -1,0 +1,149 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User Manager Documentation",
+    "description": "This is an API for User Manager Ignite Challenge",
+    "version": "0.1",
+    "contact": {
+      "email": "emsil@example-dev.com"
+    }
+  },
+  "paths":{
+    "/users": {
+      "get": {
+        "tags": ["User"],
+        "summary": "List Users",
+        "desciprion": "List all Users",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id":{
+                        "type":"string"
+                      },
+                      "name":{
+                        "type":"string"
+                      },
+                      "admin": {
+                        "type":"boolean"
+                      },
+                      "email": {
+                        "type":"string"
+                      },
+                      "created_at":{
+                        "type":"string"
+                      },
+                      "updated_at":{
+                        "type":"string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Access Denied."
+          }
+        }
+      },
+      "post": {
+        "tags": ["User"],
+        "summary": "Create Users",
+        "desciprion": "Create a new User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Jonh Doe",
+                  "email": "john.doe@example.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created"
+          },
+          "400": {
+            "description": "Email Already exists."
+          }
+        }
+      }
+    },
+    "/users/:user_id": {
+      "get": {
+        "tags": ["User"],
+        "summary": "User Profile",
+        "desciprion": "Read user profile information",
+        "responses": {
+          "200": {
+            "description": "User profile info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id":{
+                      "type":"string"
+                    },
+                    "name":{
+                      "type":"string"
+                    },
+                    "admin": {
+                      "type":"boolean"
+                    },
+                    "email": {
+                      "type":"string"
+                    },
+                    "created_at":{
+                      "type":"string"
+                    },
+                    "updated_at":{
+                      "type":"string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not Found."
+          }
+        }
+      }
+    },
+    "/users/:user_id/admin": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Make Admin",
+        "desciprion": "Make a user Admin",
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "User not Found."
+          }
+        }
+      }
+    }
+  }
+}
